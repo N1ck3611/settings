@@ -1,0 +1,58 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/N1ck3611/settings/main/AduriteScriptMaker"))()
+local Window = Library.CreateLib("Adurite Legit Lock", "DarkTheme")
+
+
+-- //LOCKS\\
+local Main = Window:NewTab("Lock")
+local MainSection = Main:NewSection("Legit Stuff")
+
+MainSection:NewButton("Streamable Lock", "Legit Lock", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/N1ck3611/settings/main/streamablelock'))()
+end)
+
+local Resolver = Window:NewTab("Resolver")
+local ResolverSection = Resolver:NewSection("Resolver for streamable lock")
+
+
+ResolverSection:NewButton("Resolver", "Bypasses Anti Lock", function()
+    local RunService = game:GetService("RunService")
+
+local function zeroOutYVelocity(hrp)
+    hrp.Velocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)
+    hrp.AssemblyLinearVelocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)
+end
+
+local function onPlayerAdded(player)
+    player.CharacterAdded:Connect(function(character)
+        local hrp = character:WaitForChild("HumanoidRootPart")
+        zeroOutYVelocity(hrp)
+    end)
+end
+
+local function onPlayerRemoving(player)
+    player.CharacterAdded:Disconnect()
+end
+
+game.Players.PlayerAdded:Connect(onPlayerAdded)
+game.Players.PlayerRemoving:Connect(onPlayerRemoving)
+
+RunService.Heartbeat:Connect(function()
+    pcall(function()
+        for i, player in pairs(game.Players:GetChildren()) do
+            if player.Name ~= game.Players.LocalPlayer.Name then
+                local hrp = player.Character.HumanoidRootPart
+                zeroOutYVelocity(hrp)
+            end
+        end
+    end)
+end)
+end)
+
+local AntiAimView = Window:NewTab("Anti-Aim Viewer")
+local AntiAimViewSection = AntiAimView:NewSection("Needed for ultimate legit set")
+
+
+AntiAimViewSection:NewButton("Anti-Aim Viewer", "Doesn't let nerds view you're aim", function()
+    local RunService = game:GetService("RunService")
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/N1ck3611/settings/main/anti-aimvieweradurite'))()
+end)
